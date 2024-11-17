@@ -1,14 +1,11 @@
-import { FlatList, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 import { styles } from "./tabCalendar.style";
 import { appointments } from "../../constants/data";
-import icon from "../../constants/icon";
 import Appointment from "../../components/Appointment";
 
 const TabCalendar = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Teste</Text>
-
       <FlatList 
         data={appointments}
         keyExtractor={ (appointment) => appointment.id_appointment }
