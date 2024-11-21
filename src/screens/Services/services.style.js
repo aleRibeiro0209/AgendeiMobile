@@ -7,7 +7,7 @@ export const styles = {
   },
   banner: {
     backgroundColor: COLORS.blue,
-    padding: 80,
+    padding: 40,
     justifyContent: "center",
     alignItems: "center",
     gap: 5

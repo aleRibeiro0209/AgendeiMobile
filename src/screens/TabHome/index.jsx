@@ -2,9 +2,12 @@ import { FlatList, Text, View } from "react-native";
 import { styles } from "./tabHome.style";
 import { doctors } from "../../constants/data";
 import Doctor from "../../components/Doctor";
-import icon from "../../constants/icon";
 
-const TabHome = () => {
+const TabHome = ({ navigation }) => {
+  const handleDoctor = (id_doctor, name, specialty, icon) => {
+    navigation.navigate("services", { id_doctor, name, specialty, icon });
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Agende os seus serviços médicos</Text>
@@ -14,10 +17,12 @@ const TabHome = () => {
         showsVerticalScrollIndicator={false}
         renderItem={ ({ item }) => {
           return (
-            <Doctor 
+            <Doctor
+              id_doctor={item.id_doctor}
               name={item.name}
               specialty={item.specialty}
-              icon={item.icon === "F" ? icon.female : icon.male}
+              icon={item.icon}
+              onPress={handleDoctor}
             />
           );
         }}

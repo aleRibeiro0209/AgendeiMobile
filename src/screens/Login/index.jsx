@@ -1,22 +1,46 @@
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import icon from "../../constants/icon";
 import { styles } from "./login.style";
 import Button from "../../components/Button";
+import { useState } from "react";
+import api from "../../constants/api";
 
-const Login = () => {
+const Login = ({ navigation }) => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const response = await api.post("/users/login", {
+        email,
+        password
+      });
+
+      if (response.data) {
+        console.log(response.data);
+      }
+    } catch(error) {
+      if(error.response?.data.error)
+        Alert.alert(error.response.data.error);
+      else
+        Alert.alert("Ocorreu um erro. Tente novamente mais tarde");
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.containerLogo}>
         <Image source={icon.logo} style={styles.logo} />
       </View>
       <View>
-        <TextInput placeholder="E-mail" style={styles.input} />
-        <TextInput placeholder="Senha" style={styles.input} secureTextEntry={true} />
-        <Button text={"Acessar"} />
+        <TextInput placeholder="E-mail" style={styles.input} onChangeText={(text) => setEmail(text)} />
+        <TextInput placeholder="Senha" style={styles.input} secureTextEntry={true} onChangeText={(text) => setPassword(text)} />
+        <Button text={"Acessar"} onPress={handleLogin} />
       </View>
       <View style={styles.footer} >
         <Text style={styles.footerText} >Não tenho conta. </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => { navigation.navigate("account") }}>
           <Text style={styles.footerLink} >Criar conta agora.</Text>
         </TouchableOpacity>
       </View>

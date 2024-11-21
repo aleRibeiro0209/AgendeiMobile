@@ -9,10 +9,16 @@ import Button from "../../components/Button";
 LocaleConfig.locales["pt-br"] = ptBR;
 LocaleConfig.defaultLocale = "pt-br";
 
-const Schedule = () => {
+const Schedule = ({ navigation, route }) => {
+
+  const { id_doctor, id_service } = route.params;
 
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedHour, setSelectedHour] = useState("");
+
+  const handleBooking = () => {
+    console.log(id_doctor, id_service, selectedDate, selectedHour);
+  }
 
   return (
     <View style={styles.container}>
@@ -47,7 +53,7 @@ const Schedule = () => {
       </View>
 
       <View>
-        <Button text={"Confirmar reserva"}/>
+        <Button text={"Confirmar reserva"} onPress={handleBooking}/>
       </View>
     </View>
   );

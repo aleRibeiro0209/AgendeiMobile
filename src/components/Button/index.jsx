@@ -1,11 +1,7 @@
 import { Alert, Text, TouchableOpacity } from "react-native";
 import { styles } from "./button.style";
 
-const Button = ({ text, theme }) => {
-
-  function teste() {
-    Alert.alert("Clicou no nosso botão");
-  }
+const Button = ({ text, theme, onPress }) => {
 
   return (
     <TouchableOpacity 
@@ -13,7 +9,7 @@ const Button = ({ text, theme }) => {
         styles.btn,
         theme === "danger" ? styles.danger : styles.primary
       ]}
-      onPress={teste} 
+      onPress={onPress} 
     >
       <Text style={styles.text}>
         { text }

@@ -40,7 +40,7 @@ export const styles = {
     gap: 5,
   },
   containerButton: {
-    flex: 1,
+    flex: 0.8,
     justifyContent: "flex-end"
   },
 }

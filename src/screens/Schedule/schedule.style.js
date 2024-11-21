@@ -5,7 +5,6 @@ export const styles = {
     flex: 1,
     backgroundColor: COLORS.white,
     justifyContent: "space-between",
-    marginBottom: 20,
     paddingHorizontal: 20
   },
   theme: {

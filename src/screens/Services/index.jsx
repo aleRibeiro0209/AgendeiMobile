@@ -1,17 +1,24 @@
 import { FlatList, Image, Text, View } from "react-native";
 import { styles } from "./services.style";
 import { doctors_services } from "../../constants/data";
-import icon from "../../constants/icon";
+import icone from "../../constants/icon";
 import Service from "../../components/Service";
 
-const Services = () => {
+const Services = ({ navigation, route }) => {
+
+  const { id_doctor, name, specialty, icon} = route.params;
+  
+  const handleService = (id_service) => {
+    navigation.navigate("schedule", { id_doctor, id_service });
+  }
+
   return (
     <View style={styles.container}>
 
       <View style={styles.banner}>
-        <Image source={icon.female} style={styles.icon}/>
-        <Text style={styles.name}>Ale</Text>
-        <Text style={styles.specialty}>Consulta</Text>
+        <Image source={icon === "F" ? icone.female : icone.male} style={styles.icon}/>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.specialty}>{specialty}</Text>
       </View>
 
       <FlatList 
@@ -25,6 +32,7 @@ const Services = () => {
                 id_service={item.id_service}
                 description={item.description}
                 price={item.price}
+                onPress={handleService}
               />
             </View>
           );
