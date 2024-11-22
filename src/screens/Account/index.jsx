@@ -20,7 +20,8 @@ const Account = ({ navigation }) => {
       });
 
       if (response.data) {
-        console.log(response.data);
+        Alert.alert("Usuário Cadastrado com sucesso!");
+        navigation.goBack();
       }
     } catch(error) {
       if(error.response?.data.error)

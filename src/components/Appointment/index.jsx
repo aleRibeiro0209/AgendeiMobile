@@ -3,7 +3,10 @@ import { styles } from "./appointment.style";
 import icon from "../../constants/icon";
 import Button from "../Button";
 
-const Appointment = ({ id_appointment, service, doctor, specialty, booking_date, booking_hour }) => {
+const Appointment = ({ id_appointment, service, doctor, specialty, booking_date, booking_hour, onPress }) => {
+
+  const dt = new Date(booking_date);
+
   return (
     <View style={styles.appointment}>
       <Text style={styles.name}>
@@ -14,7 +17,7 @@ const Appointment = ({ id_appointment, service, doctor, specialty, booking_date,
         <View style={styles.containerBooking}>
           <View style={styles.booking}>
             <Image style={styles.icon} source={icon.calendar} />
-            <Text style={styles.textBooking}>{booking_date}</Text>
+            <Text style={styles.textBooking}>{dt.toLocaleDateString()}</Text>
           </View>
           <View style={styles.booking}>
             <Image style={styles.icon} source={icon.clock} />
@@ -22,7 +25,7 @@ const Appointment = ({ id_appointment, service, doctor, specialty, booking_date,
           </View>
         </View>
         <View style={styles.containerButton}>
-          <Button theme={"danger"} text={"Cancelar Reserva"} />
+          <Button theme={"danger"} text={"Cancelar Reserva"} onPress={() => { onPress(id_appointment) }} />
         </View>
       </View>
     </View>

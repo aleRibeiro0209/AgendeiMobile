@@ -20,4 +20,8 @@ export const styles = {
     fontSize: FONT_SIZE.md,
     color: COLORS.gray1,
   },
+  containerButton: {
+    marginTop: "auto",
+    padding: 10
+  }
 }

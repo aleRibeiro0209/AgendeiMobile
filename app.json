@@ -10,19 +10,25 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0D6EFD"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage": "./assets/splash-icon.png",
+        "backgroundColor": "#0D6EFD"
+      },
+      "package": "com.aleribeiro0209.AgendeiMobile"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/splash-icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "73837083-bf48-45fd-8dce-c3b0c58e40d9"
+      }
     }
   }
 }

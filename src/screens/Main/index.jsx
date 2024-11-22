@@ -13,26 +13,23 @@ const Main = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarStyle: {
-          height: 40,
-        },
         headerStyle: {
           elevation: 0,
         },
-        headerTintColor: COLORS.blue
-      }}  
+        headerTintColor: COLORS.blue,
+      }}
     >
       <Tab.Screen
         name={"Home"}
         component={TabHome}
         options={{
           headerTitleAlign: "center",
+          tabBarShowLabel: false,
           headerTitle: () => {
             return (
               <Image source={icon.logo} style={styles.logo} />
             );
           },
-          tabBarShowLabel: false,
           tabBarIcon: ({ focused }) => {
             return (
               <Image 
@@ -52,6 +49,7 @@ const Main = () => {
         options={{
           headerTitleAlign: "center",
           tabBarShowLabel: false,
+          unmountOnBlur: true,
           tabBarIcon: ({ focused }) => {
             return (
               <Image 
@@ -71,6 +69,7 @@ const Main = () => {
         options={{
           headerTitleAlign: "center",
           tabBarShowLabel: false,
+          unmountOnBlur: true,
           tabBarIcon: ({ focused }) => {
             return (
               <Image 

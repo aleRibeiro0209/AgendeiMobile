@@ -6,8 +6,9 @@ export const styles = {
     height: 31.97,
   },
   iconBar: {
-    width: 25,
-    height: 25,
+    marginTop: 10,
+    width: 35,
+    height: 35,
   },
   inFocus: {
     opacity: 1,

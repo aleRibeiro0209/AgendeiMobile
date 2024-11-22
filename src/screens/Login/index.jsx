@@ -2,13 +2,15 @@ import { Alert, Image, Text, TextInput, TouchableOpacity, View } from "react-nat
 import icon from "../../constants/icon";
 import { styles } from "./login.style";
 import Button from "../../components/Button";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import api from "../../constants/api";
+import { AuthContext } from "../../contexts/auth";
 
 const Login = ({ navigation }) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setUser } = useContext(AuthContext);
 
   const handleLogin = async () => {
     try {
@@ -18,7 +20,8 @@ const Login = ({ navigation }) => {
       });
 
       if (response.data) {
-        console.log(response.data);
+        api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+        setUser(response.data);
       }
     } catch(error) {
       if(error.response?.data.error)

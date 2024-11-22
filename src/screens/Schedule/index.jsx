@@ -1,10 +1,12 @@
-import { Text, View } from "react-native";
+import { Alert, Text, View } from "react-native";
 import { styles } from "./schedule.style";
 import { Calendar, LocaleConfig } from "react-native-calendars";
 import { ptBR } from "../../constants/calendar";
 import { useState } from "react";
 import { Picker } from "@react-native-picker/picker";
 import Button from "../../components/Button";
+import api from "../../constants/api";
+import { horarios } from "../../constants/data"
 
 LocaleConfig.locales["pt-br"] = ptBR;
 LocaleConfig.defaultLocale = "pt-br";
@@ -14,10 +16,27 @@ const Schedule = ({ navigation, route }) => {
   const { id_doctor, id_service } = route.params;
 
   const [selectedDate, setSelectedDate] = useState("");
-  const [selectedHour, setSelectedHour] = useState("");
+  const [selectedHour, setSelectedHour] = useState("09:00");  
 
-  const handleBooking = () => {
-    console.log(id_doctor, id_service, selectedDate, selectedHour);
+  const handleBooking = async () => {
+    try {
+      const response = await api.post("/appointments", {
+        id_doctor,
+        id_service,
+        booking_date: selectedDate,
+        booking_hour: selectedHour
+      });
+
+      if (response.data?.id_appointment) {
+        Alert.alert("Agendamento realizado com sucesso!");
+        navigation.popToTop();
+      }
+    } catch(error) {
+      if(error.response?.data.error)
+        Alert.alert(error.response.data.error);
+      else
+        Alert.alert("Ocorreu um erro. Tente novamente mais tarde");
+    }
   }
 
   return (
@@ -45,9 +64,11 @@ const Schedule = ({ navigation, route }) => {
             }}
             style={styles.picker}
           >
-            <Picker.Item label={"09:00"} value={"09:00"} />
-            <Picker.Item label={"09:30"} value={"09:30"} />
-            <Picker.Item label={"10:00"} value={"10:00"} />
+            {
+              horarios.map((horario) => (
+                <Picker.Item key={horario.value} label={horario.label} value={horario.value} />
+              ))
+            }
           </Picker>
         </View>
       </View>
